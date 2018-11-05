@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Apopesc6/se3316-apopesc6-lab3/issues"
   },
-  "homepage": "https://github.com/Apopesc6/se3316-apopesc6-lab3#readme"
+  "homepage": "https://github.com/Apopesc6/se3316-apopesc6-lab3#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.9"
+  }
 }
