@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>se3316-apopesc6-lab3</title>
+        <meta charset = "UTF-8">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.8/purify.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
+    </head>
+    <body>
+        
+        <h1>Shopping Cart</h1>
+            
+    
+        <h3>Add an Item to the Shopping Cart: </h3>
+        
+        Name:<br><input type = "text" name = "name" id = "name"/> <br>
+        Price:<br><input type = "number" name = "price" id = "price"/><br>
+        Tax:<br><input type = "number" name = "tax" id = "tax"/><br>
+        Quantity:<br><input type = "number" name = "quantity" id = "quantity"/><br>
+        <input type = "button" value = "Create Item"  onClick = "itemSubmit()"/>
+        
+        
+        <h3>Update the Quantity of an Item:</h3>
+        
+        Item name:<br><input type = "text" name = "updateName" id = "updateName"/><br>
+        New quantity of item:<br> <input type = "number" name = "updateQuantity" id = "updateQuantity"/><br>
+        <input type = "button" value = "Update Quantity" onClick = "quantityUpdate()"/>
+        
+        
+        <h3>Update the Tax of an Item:</h3>
+        
+        Item name:<br><input type="text" name = "taxName" id = "taxName"/><br>
+        Updated tax rate:<br><input type="number" name="updateTax" id = "updateTax"/><br>
+        <input type = "button" value = "Update Tax" onClick = "taxUpdate()"/>
+        
+        
+        <h3>Delete an Item:</h3>
+        
+        Item name:<br><input type = "text" name = "deleteName" id = "deleteName"/><br>
+        <input type = "button" value = "Delete Item" onClick = "deleteUpdate()"/>
+        
+        <h3> Get all Available Items, Quantity, and Price: </h3>
+        <input type = "button" value = "Get All" onClick = "getAll()"/>
+        <div id = "getAllDiv"></div>
+        
+        
+        <h3> Get the quantity, price, and tax rate of a given item</h3>
+    
+        Item name: <br><input type = "text" name = "getOne" id = "getOne"/><br>
+        <input type = "button" value = "Get One" onClick = "getOne()"/>
+        <div id = "getOneDiv"></div>
+        
+    </body>
+</html>
