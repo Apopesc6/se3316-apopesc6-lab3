@@ -3,180 +3,201 @@ function sanitize(strings, ...values) {
     return DomPurify.sanitize(dirty);
 }
 
-itemSubmit = () => {
-    var validInputs = true;
+
+function createItem() {
     
-    const name = document.getElementById('name').value;
-    const price = document.getElementById('price').value;
-    const tax = document.getElementById('tax').value;
-    const quantity= document.getElementById('quantity').value;
-    if( name == "" ||  price == "" || quantity =="")
-    {
-        alert("Please enter valid values");
-        validInputs = false;
-    }
+    var addedName = document.getElementById('addName').value;
+    var addedPrice = document.getElementById('addPrice').value;
+    var addedTax = document.getElementById('addTax').value;
+    var addedQuantity= document.getElementById('addQuantity').value;
     
-    if(validInputs === true)
+    if( addedName != "" &&  addedPrice != "" && addedQuantity !="")
     {
-        var xhttp = new XMLHttpRequest();
-         xhttp.open("POST", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/create", true);
-         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        var HTTPreq = new XMLHttpRequest();
+        // /items/create - accesses function in items.js - change this
+        HTTPreq.open("POST", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/create", true);
+        HTTPreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        HTTPreq.send(`itemName=${addedName}&itemPrice=${addedPrice}&itemPriceTax=${addedTax}&itemQuantity=${addedQuantity}`);
          
-         xhttp.onreadystatechange = function() {//Call a function when the state changes.
-          if(xhttp.readyState == 4 && xhttp.status == 200) {
-              alert(xhttp.responseText);
-          }
+        HTTPreq.onreadystatechange = function() {//Call a function when the state changes.
+            if(HTTPreq.readyState == 4 && HTTPreq.status == 200) {
+                alert("Added "+addedName+" successfully to the database!");
+                document.getElementById('addName').value = "";
+                document.getElementById('addPrice').value = "";
+                document.getElementById('addTax').value = "";
+                document.getElementById('addQuantity').value = "";
+            }
         };
-        xhttp.send(`itemName=${name}&itemPrice=${price}&itemPriceTax=${tax}&itemQuantity=${quantity}`);
-    }
-};
-
-quantityUpdate = () => {
-    var validInputs = true;
-    const name = document.getElementById('updateName').value;
-    const quantity = document.getElementById('updateQuantity').value;
-    
-    if( name == "" || quantity =="")
-    {
-        alert("Please enter valid values");
-        validInputs = false;
+        
+        
+        
+    }else{
+        alert("Please enter values for name, price, and quantity");
     }
     
-    if(validInputs === true)
-    {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/updateQuantity",true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.onreadystatechange = function() {//Call a function when the state changes.
-          if(xhttp.readyState == 4 && xhttp.status == 200) {
-              alert(xhttp.responseText);
-          }
-        };
-        xhttp.send(`itemName=${name}&itemQuantity=${quantity}`);
-    }
-};
+}
 
-taxUpdate = () => {
-    var validInputs = true;
-    const name = document.getElementById('taxName').value;
-    const tax = document.getElementById('updateTax').value;
+
+function quantityItemUpdate(){
     
-    if( name == "" || tax =="")
-    {
-        alert("Please enter valid values");
-        validInputs = false;
-    }
-    if(validInputs === true)
-    {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "https://se3316-apopesc6-lab3-apoopesc6.c9users.io/api/items/updateTaxrate",true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.onreadystatechange = function() {//Call a function when the state changes.
-          if(xhttp.readyState == 4 && xhttp.status == 200) {
-              alert(xhttp.responseText);
-          }
-        };
-        xhttp.send(`itemName=${name}&itemPriceTax=${tax}`);
-    }  
+    var quantityName = document.getElementById('updateItemName').value;
+    var quantityofItem = document.getElementById('updateQuantity').value;
     
-};
-
-deleteUpdate = () => {
-    var validInputs = true;
-    const name = document.getElementById('deleteName').value;
-
-    if( name == "")
+    if(quantityName != "" && quantityofItem !="")
     {
-        alert("Please enter valid values");
-        validInputs = false;
-    }    
-    if(validInputs == true)
-    {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("DELETE", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/delete",true);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.onreadystatechange = function() {//Call a function when the state changes.
-        if(xhttp.readyState == 4 && xhttp.status == 200) {
-              alert(xhttp.responseText);
+        var HTTPreq = new XMLHttpRequest();
+        HTTPreq.open("POST", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/updateQuantity",true);
+        HTTPreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        HTTPreq.send(`itemName=${quantityName}&itemQuantity=${quantityofItem}`);
+        
+        HTTPreq.onreadystatechange = function() {//Call a function when the state changes.
+          if(HTTPreq.readyState == 4 && HTTPreq.status == 200) {
+              alert("Updated the quantity of "+quantityName+ " successfully in the database!");
+              document.getElementById('updateItemName').value = "";
+              document.getElementById('updateQuantity').value = "";
           }
         };
-        xhttp.send(`itemName=${name}`);
+        
+    }else{
+        alert("Please enter values for name and quantity");
     }
-};
+    
+}
 
-getAll = () => {
+
+function taxItemUpdate(){
+    
+    var taxName = document.getElementById('taxItemName').value;
+    var taxofItem = document.getElementById('updateTax').value;
+    
+    if( taxName != "" && taxofItem !="")
+    {
+        var HTTPreq = new XMLHttpRequest();
+        HTTPreq.open("POST", "https://se3316-apopesc6-lab3-apoopesc6.c9users.io/api/items/updateTaxrate",true);
+        HTTPreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        HTTPreq.send(`itemName=${taxName}&itemPriceTax=${taxofItem}`);
+        
+        HTTPreq.onreadystatechange = function() {//Call a function when the state changes.
+          if(HTTPreq.readyState == 4 && HTTPreq.status == 200) {
+              alert("Updated the tax of "+taxName+ " successfully in the database!");
+              document.getElementById('taxItemName').value = "";
+              document.getElementById('updateTax').value = "";
+          }
+        };
+        
+        
+    }else{
+        alert("Please enter values for name and tax");
+    }
+    
+}
+
+
+function deleteItem(){
+    
+    var deleteItemName = document.getElementById('deleteItemName').value;
+
+    if( deleteItemName != "")
+    {
+        var HTTPreq = new XMLHttpRequest();
+        HTTPreq.open("DELETE", "https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/delete",true);
+        HTTPreq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        HTTPreq.send(`itemName=${deleteItemName}`);
+        
+        HTTPreq.onreadystatechange = function() {//Call a function when the state changes.
+            if(HTTPreq.readyState == 4 && HTTPreq.status == 200) {
+                alert("Deleted "+deleteItemName+ " successfully from the database!");
+                document.getElementById('deleteItemName').value = "";
+            }
+        };
+        
+    }else{
+        alert("Please enter a value for name");
+    }
+}
+
+
+function getAllData(){
     setInterval(function(){
-    var itemName;
-    var itemPrice;
-    var itemQuantity;
+        
+    var writingSpace = document.getElementById('writingSpace'); 
+    
+    var Name;
+    var Price;
+    var Quantity;
 
-    var element = document.getElementById("getAllDiv");
+    var HTTPreq = new XMLHttpRequest();
     
-    document.getElementById("getAllDiv").innerHTML = "";
+    HTTPreq.open('GET', 'https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/all', true);
+    HTTPreq.send();
     
-    var request = new XMLHttpRequest();
-    request.open('GET', 'https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/all', true);
-    request.onload = function () {
+    HTTPreq.onload = function () {
+        
         // Begin accessing JSON data here
-        var data = JSON.parse(this.response);
-        console.log(data);
-        if (request.status >= 200 && request.status < 400) {
-            data.forEach(item => {
-            itemName = item.itemName;
-            itemPrice = item.itemPrice;
-            itemQuantity = item.itemQuantity;
+        var database = JSON.parse(this.response);
+        console.log(database);
+        
+        database.forEach(iteminDatabase => {
+            Name = iteminDatabase.itemName;
+            Price = iteminDatabase.itemPrice;
+            Quantity = iteminDatabase.itemQuantity;
+        
+            var textNode = ("Name: " + Name + ", Price $" + Price + ", Quantity: " + Quantity);
+            var listElement = document.createElement('li');
+            listElement.appendChild(document.createTextNode(textNode));
             
-            var para = document.createElement("p");
-            var node = document.createTextNode("item name: " + itemName + "; item price $" + itemPrice + "; item quantity: " + itemQuantity);
-            para.appendChild(node);
-            
-            element.appendChild(para);
+            writingSpace.appendChild(listElement);
         });
-        } else {
-            console.log('error');
-        }
+        
     };
-    request.send();
+    
+    document.getElementById("writingSpace").innerHTML = "";
     }, 2000);
    
-};
+}
 
-getOne = () => {
-    var validInputs = true;
-    var itemName;
-    var itemPrice;
-    var itemPriceTax;
 
-    var element = document.getElementById('getOneDiv');
+function getOneData(){
     
-    document.getElementById('getOneDiv').innerHTML = "";
+    var writingSpace = document.getElementById('getOneWritingSpace');
+    document.getElementById('getOneWritingSpace').innerHTML = "";
     
-    const name = document.getElementById('getOne').value;
+    var Name;
+    var Price;
+    var Tax;
+    
+    const searchName = document.getElementById('searchItem').value;
 
-    if( name == "")
+    if( searchName != "")
     {
-        alert("Please enter valid values");
-        validInputs = false;
-    }    
-    if(validInputs === true)
-    {
-        var request = new XMLHttpRequest();
-        request.open('GET', `https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/${name}`, true);
-        request.onload = function () {
-        // Begin accessing JSON data here
-        var data = JSON.parse(this.response);
-        
-        itemName = data.itemName;
-        itemPrice = data.itemPrice;
-        itemPriceTax = data.itemPriceTax;
-        
-        var para = document.createElement("p");
-        var node = document.createTextNode("item name: " + itemName + "; item price $" + itemPrice + "; item tax rate: " + itemPriceTax + "%");
-        para.appendChild(node);
+        var HTTPreq = new XMLHttpRequest();
+        HTTPreq.open('GET', `https://se3316-apopesc6-lab3-apopesc6.c9users.io/api/items/${searchName}`, true);
+        HTTPreq.send();
+        HTTPreq.onload = function () {
             
-        element.appendChild(para);    
+            if(HTTPreq.readyState == 4 && HTTPreq.status == 200) {
+                alert("Retrieved "+searchName+" from the database!");
+                document.getElementById('searchItem').value = "";
+            }
+            
+            // Begin accessing JSON data here
+            var data = JSON.parse(this.response);
         
+            Name = data.itemName;
+            Price = data.itemPrice;
+            Tax = data.itemPriceTax;
+        
+            var para = document.createElement("p");
+            var node = document.createTextNode("item name: " + Name + "; item price $" + Price + "; item tax rate: " + Tax + "%");
+            para.appendChild(node);
+            
+            writingSpace.appendChild(para);    
         };
-        request.send();
+        
+    }else{
+        alert("Please enter a value for name");
     }
-};
+    
+    
+}

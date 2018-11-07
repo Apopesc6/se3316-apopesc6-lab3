@@ -13,42 +13,44 @@
     
         <h3>Add an Item to the Shopping Cart: </h3>
         
-        Name:<br><input type = "text" name = "name" id = "name"/> <br>
-        Price:<br><input type = "number" name = "price" id = "price"/><br>
-        Tax:<br><input type = "number" name = "tax" id = "tax"/><br>
-        Quantity:<br><input type = "number" name = "quantity" id = "quantity"/><br>
-        <input type = "button" value = "Create Item"  onClick = "itemSubmit()"/>
+        Name:<br><input type = "text"  id = "addName"/> <br>
+        Price:<br><input type = "number"  id = "addPrice"/><br>
+        Tax:<br><input type = "number"  id = "addTax"/><br>
+        Quantity:<br><input type = "number" id = "addQuantity"/><br>
+        <input type = "button" value = "Create Item"  onClick = "createItem()"/>
         
         
         <h3>Update the Quantity of an Item:</h3>
         
-        Item name:<br><input type = "text" name = "updateName" id = "updateName"/><br>
-        New quantity of item:<br> <input type = "number" name = "updateQuantity" id = "updateQuantity"/><br>
-        <input type = "button" value = "Update Quantity" onClick = "quantityUpdate()"/>
+        Item name:<br><input type = "text"  id = "updateItemName"/><br>
+        New quantity of item:<br> <input type = "number" id = "updateQuantity"/><br>
+        <input type = "button" value = "Update Quantity" onClick = "quantityItemUpdate()"/>
         
         
         <h3>Update the Tax of an Item:</h3>
         
-        Item name:<br><input type="text" name = "taxName" id = "taxName"/><br>
-        Updated tax rate:<br><input type="number" name="updateTax" id = "updateTax"/><br>
-        <input type = "button" value = "Update Tax" onClick = "taxUpdate()"/>
+        Item name:<br><input type="text" id = "taxItemName"/><br>
+        Updated tax rate:<br><input type="number" id = "updateTax"/><br>
+        <input type = "button" value = "Update Tax" onClick = "taxItemUpdate()"/>
         
         
         <h3>Delete an Item:</h3>
         
-        Item name:<br><input type = "text" name = "deleteName" id = "deleteName"/><br>
-        <input type = "button" value = "Delete Item" onClick = "deleteUpdate()"/>
+        Item name:<br><input type = "text" id = "deleteItemName"/><br>
+        <input type = "button" value = "Delete Item" onClick = "deleteItem()"/>
+        
+        
+        <h3> Get the quantity, price, and tax rate of a given item: </h3>
+    
+        Item name: <br><input type = "text" id = "searchItem"/><br>
+        <input type = "button" value = "Get One" onClick = "getOneData()"/>
+        <div id = "getOneWritingSpace"></div>
+        
         
         <h3> Get all Available Items, Quantity, and Price: </h3>
-        <input type = "button" value = "Get All" onClick = "getAll()"/>
-        <div id = "getAllDiv"></div>
         
-        
-        <h3> Get the quantity, price, and tax rate of a given item</h3>
-    
-        Item name: <br><input type = "text" name = "getOne" id = "getOne"/><br>
-        <input type = "button" value = "Get One" onClick = "getOne()"/>
-        <div id = "getOneDiv"></div>
+        <input type = "button" value = "Get All" onClick = "getAllData()"/>
+        <ol id = "writingSpace"></ol>
         
     </body>
 </html>
